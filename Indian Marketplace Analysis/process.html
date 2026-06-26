@@ -1,0 +1,749 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Indian Marketplace Analysis</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+
+	table.collection-content {
+		width: 100%;
+		table-layout: fixed;
+	}
+
+	table.collection-content th,
+	table.collection-content td {
+		overflow-wrap: anywhere;
+	}
+
+	table.collection-content td > .user,
+	table.collection-content td > time {
+		white-space: pre-wrap;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content-wrapper {
+	overflow-x: auto;
+}
+
+@media only print {
+	.collection-content-wrapper {
+		overflow-x: visible;
+	}
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	gap: 46px;
+}
+
+.column {
+	min-width: 0;
+	overflow: hidden;
+}
+
+.column > *:first-child {
+	margin-top: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+table {
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol.numbered-list.numbered-list-digits-2 {
+	padding-inline-start: 2em;
+}
+
+ol.numbered-list.numbered-list-digits-3plus {
+	padding-inline-start: 2.4em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="38648c12-d40d-802a-9dfc-d3d563170d78" class="page sans"><header><h1 class="page-title" dir="auto">Indian Marketplace Analysis</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="38648c12-d40d-80d3-89e4-efbfb529fdf2" class="">Hello everyone.<strong> I&#x27;m a Data Analyst </strong>and this is my <strong>first Notion project. </strong>I was working on Github before but I really wanted to try something new, like Notion.</p></div><div style="display:contents" dir="auto"><p id="38648c12-d40d-8018-bef9-e7607da31e6b" class="">So I am going to use <a href="https://www.kaggle.com/datasets/saadharoon27/madhav-store-dataset">THIS</a> dataset to do my analysis today, and the libraries I used can be viewed by <a href="https://colab.research.google.com/drive/1cgWUY6phqlNovlhG85AReiyfQ1kHMWoM#scrollTo=64v2rymU4nJ2">THIS</a> link (The first code notebook). You can view the full project process by this link too.</p></div><div style="display:contents" dir="auto"><p id="38648c12-d40d-80c9-b6f5-e96b9b3fd76a" class="">The envivroment I am working in is <strong>Google Colab. </strong></p></div><div style="display:contents" dir="auto"><p id="38748c12-d40d-804d-8567-fdff63d6c923" class="">So, let me begin my analysis.</p></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Preparing the dataset</summary><div class="indented"><div style="display:contents" dir="auto"><h2 id="38848c12-d40d-80ec-9933-df36080b1ebb" class="">Extracting the files</h2></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-8013-923f-d299ff76e87a" class="">The dataset on Kaggle contained 2 <strong>csv</strong> files: <strong>Details.csv</strong> and <strong>Orders.csv</strong> . So I downloaded a <code>zip</code> file, which contained both of them.</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-80f8-8a27-cb35ffae0e5c" class="">Then, using python&#x27;s famous library <code>zipfile</code> and its attribute <code>ZipFile</code> I extracted the 2 csv&#x27;s out of it.</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-80cd-b06e-cc211b8cf31f" class=""><em>Input:</em></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-80eb-a801-fed2f8d6e2e7" class=""><code>with zp.ZipFile(&quot;/content/archive(1).zip&quot;) as zip_ref: zip_ref.extractall(&quot;/content&quot;)</code></p></div><div style="display:contents" dir="auto"><h2 id="38848c12-d40d-805b-9400-e7d482c6f756" class="">Clearing the dataset</h2></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-805e-9112-de6d7999fcaa" class="">So for the next step I needed <code>pandas</code> and its various attributes, such as:</p></div><div style="display:contents" dir="auto"><ul id="38848c12-d40d-800a-99c6-c77100f64def" class="bulleted-list"><li style="list-style-type:disc"><code>pd.read_csv</code></li></ul></div><div style="display:contents" dir="auto"><ul id="38848c12-d40d-80b0-9370-deaacca73b94" class="bulleted-list"><li style="list-style-type:disc"><code>columns</code></li></ul></div><div style="display:contents" dir="auto"><ul id="38848c12-d40d-8033-a1c5-c02ed9c22bc5" class="bulleted-list"><li style="list-style-type:disc"><code>.isnull()</code></li></ul></div><div style="display:contents" dir="auto"><ul id="38848c12-d40d-801f-bdac-ed0b62cb213d" class="bulleted-list"><li style="list-style-type:disc"><code>.sum()</code></li></ul></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-807e-bd1d-eebb8ee7081f" class="">The First thing I did was obviously reading the csv&#x27;s:</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-80ee-b70b-ed6db89b3130" class=""><code>df1=pd.read_csv(&quot;/content/Details.csv&quot;) df2=pd.read_csv(&quot;/content/Orders.csv&quot;)</code></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-8032-8381-d099a6ad6c4a" class="">Then, I checked the columns, to know with what data I am going to work with and create the first ideas:</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-801f-96fe-f9858e6d902c" class=""><em>Input:</em></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-80d3-9239-e6f17c7efdc7" class=""><code>print(df1.columns) print(df2.columns)</code></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-8071-9156-e17ec5eece64" class=""><em>Output:</em></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-802d-99e2-fbdf86df1b38" class=""><code>Index([&#x27;Order ID&#x27;, &#x27;Amount&#x27;, &#x27;Profit&#x27;, &#x27;Quantity&#x27;, &#x27;Category&#x27;, &#x27;Sub-Category&#x27;, &#x27;PaymentMode&#x27;], dtype=&#x27;object&#x27;)</code></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-800b-a476-cf797a9df99b" class=""><code>Index([&#x27;Order ID&#x27;, &#x27;Order Date&#x27;, &#x27;CustomerName&#x27;, &#x27;State&#x27;, &#x27;City&#x27;], dtype=&#x27;object&#x27;)</code></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-8022-a190-fe8f8f223337" class="">After that, I checked if there are any null values in the dataset:</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-8015-9f36-e4e984a1c69c" class=""><em>Input:</em></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-80e6-9f80-f0db438c5f7a" class=""><code>print(df1.isnull().sum())</code></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-8098-a279-de3b4a203f83" class=""><em>Output:</em></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-800a-964e-ca77229e547f" class=""><code>Order ID        0 Amount          0 Profit          0 Quantity        0 Category        0 Sub-Category    0 PaymentMode     0 dtype: int64</code></p></div></div></details></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-8068-aecf-c504ce4b19e1" class="">(Click to view the code and explanation)</p></div><div style="display:contents" dir="auto"><p id="38648c12-d40d-808c-8d96-f486c64bb62c" class="">After careful review of the dataset, here are the questions I am going to answer today:</p></div><div style="display:contents" dir="auto"><ol type="1" id="38648c12-d40d-807a-9812-c270e5c1792b" class="numbered-list" start="1"><li><strong>How has the company&#x27;s profit changed over the year?</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38648c12-d40d-8006-8c13-e9e322027559" class="numbered-list" start="2"><li><strong>Which month is the most profitable?</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38648c12-d40d-8064-9959-d545f6cc902a" class="numbered-list" start="3"><li><strong>Which month is the least profitable?</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38648c12-d40d-805d-bca3-d0beeaa3185c" class="numbered-list" start="4"><li><strong>What are the Top 15 most profitable regions for the company?</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38648c12-d40d-8016-a04b-fd3d4e10c355" class="numbered-list" start="5"><li><strong>Which region is the most profitable?</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38648c12-d40d-806d-91b7-f0c985e97343" class="numbered-list" start="6"><li><strong>The amount of each category sold where the profit is twice the average</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38648c12-d40d-80c0-8a02-d12d0f57a33c" class="numbered-list" start="7"><li><strong>What caused the downfall and then the fast uprising of the company?</strong></li></ol></div><div style="display:contents" dir="auto"><p id="38648c12-d40d-80cf-be97-e226695f1bc1" class="">So, let&#x27;s begin our journey!</p></div><div style="display:contents" dir="auto"><h1 id="38648c12-d40d-801d-bdc0-d87cacd5af1b" class="">Chapter 1: Company&#x27;s profit over the year</h1></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Tap to see the code</summary><div class="indented"><div style="display:contents" dir="auto"><p id="38948c12-d40d-8067-8165-db2d97a6b8de" class="">For this chapter, I am going to need 3 libraries:</p></div><div style="display:contents" dir="auto"><ul id="38948c12-d40d-807a-96be-cebfed4ecc14" class="bulleted-list"><li style="list-style-type:disc"><code>sqlite3</code></li></ul></div><div style="display:contents" dir="auto"><ul id="38948c12-d40d-80e8-8580-db677ff1cca7" class="bulleted-list"><li style="list-style-type:disc"><code>matplotlib</code></li></ul></div><div style="display:contents" dir="auto"><ul id="38948c12-d40d-8000-98dd-e8dbad722c9d" class="bulleted-list"><li style="list-style-type:disc"><code>seaborn</code></li></ul></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80ad-93af-e97d3daeb5b3" class="">The first step is to connect to SQLite database and turn the 2 dataframes into SQL tables:</p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-800c-8a73-eb896484d0b5" class=""><em>Input</em>:</p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8071-ac60-ca4c93943344" class=""><code>conn=sqlite3.connect(&quot;:memory:&quot;) df1.to_sql(&quot;Details&quot;, conn) df2.to_sql(&quot;Orde.rs&quot;, conn)</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80e5-9a3b-d28a63c42f51" class="">The second step is - I am going to use SQL  to create a query which is going to display the total profit of the company for every month:</p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80d2-95f9-c73f3f27131d" class=""><code>query=&quot;&quot;&quot; SELECT o.&quot;Order Date&quot; AS Month, SUM(d.Profit) AS Profit</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80d3-a5fb-d60f7d1069dc" class=""><code>FROM Orders o </code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80a4-98f2-df5dab250399" class=""><code>INNER JOIN Details d ON o.&quot;Order ID&quot; = d.&quot;Order ID&quot; </code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8051-a8b0-f6761a8b1fd3" class=""><code>GROUP BY o.&quot;Order Date&quot; </code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80a6-aa3f-c843505602d5" class=""><code>&quot;&quot;&quot;</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-806e-a81b-ff5d4426945b" class=""><code>data=pd.read_sql(query, conn)</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8001-9f52-deb62621977a" class=""><em>I prepared the dataframe for it by converting the format of the </em><em><code>“Order Date”</code></em><em>column from DD/MM/YYYY to MM with a shorter format (for example, Jan instead of January, or Jun instead of June)</em></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80d1-975d-ccf918c5bf01" class=""><em>Input: </em></p></div><div style="display:contents" dir="auto"><ul id="38948c12-d40d-809a-8c70-e3879b6494b9" class="bulleted-list"><li style="list-style-type:disc"><code>df2[&#x27;Order Date&#x27;] = pd.to_datetime(df2[&#x27;Order Date&#x27;], format=&#x27;%d-%m-%Y&#x27;)</code></li></ul></div><div style="display:contents" dir="auto"><ul id="38948c12-d40d-80ec-a518-f29b1811dcb0" class="bulleted-list"><li style="list-style-type:disc"><code>df2[&quot;Order Date&quot;] = pd.to_datetime(df2[&quot;Order Date”]).dt.strftime(”%b”)</code></li></ul></div></div></details></div><div style="display:contents" dir="auto"><p id="38748c12-d40d-80ad-850c-cbbfee81a643" class="">To show changes over a period of time (in this case - over months), I am going to need a <strong>Lineplot.</strong></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-809a-bc9c-c59640e860b5" class="">The Lineplot would also help us see, if the company is vulnerable to seasonal or technological changes, in which months the profit is better, and where it is worse.</p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8033-a276-dd38219f9f6f" class="">It can also help us find patterns and trends in the incoming chapters.</p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-806f-b5d0-da774cd9cb36" class="">We&#x27;re going to find out the standard deviation, the difference between months in percents (if needed).</p></div><div style="display:contents" dir="auto"><p id="38748c12-d40d-8074-8269-c37f49b0c120" class="">The easiest way to do a good Lineplot in python is to use 2 libraries: <code>matplotib</code> and <code>seaborn</code> :</p></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Tap to see the input</summary><div class="indented"><div style="display:contents" dir="auto"><h3 id="38948c12-d40d-80e4-8e4a-d134cdcd4aa6" class="">Setting up the figure</h3></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80fb-9d4f-ed20395ce310" class=""><code>fig, ax=plt.subplots(figsize=(12,10), dpi=180)</code></p></div><div style="display:contents" dir="auto"><h3 id="38948c12-d40d-80f3-9de6-f67a2134ccf8" class="">Customizing the plot with seaborn</h3></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80ad-9a06-c220c81cd71d" class=""><code>sns.set_style(&quot;whitegrid&quot;) sns.set_context(&quot;notebook&quot;)</code></p></div><div style="display:contents" dir="auto"><h3 id="38948c12-d40d-8056-b75d-fd65fdab4f54" class="">Creating the plot</h3></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8093-9e2f-cf8b875c92c5" class=""><code>sns.lineplot(data=year, x=&quot;Month&quot;, y=&quot;Profit&quot;,color=&quot;darkblue&quot;, linewidth=4, markers=True, marker=&quot;o&quot;, markersize=12)</code></p></div><div style="display:contents" dir="auto"><h3 id="38948c12-d40d-8029-9f58-e46cca3c62f1" class="">Setting up the titles</h3></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-805c-889a-d2e68379652f" class=""><code>plt.title(&quot;Lineplot: Profit of the company for every month&quot;, fontsize=20, fontweight=&quot;bold&quot;) plt.ylabel(&quot;Profit&quot;, fontsize=14) plt.xlabel(&quot;Month&quot;, fontsize=14)</code></p></div><div style="display:contents" dir="auto"><h3 id="38948c12-d40d-80c7-8ef6-f526d370d431" class="">Saving the figure</h3></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80b3-9452-e4d0fd6d06c8" class=""><code>plt.tight_layout()<br/>sns.despine()<br/>plt.savefig(&quot;YearlyLineplot.png&quot;, dpi=300, bbox_inches=&quot;tight&quot;)<br/>plt.show()</code></p></div></div></details></div><div style="display:contents" dir="auto"><h2 id="38748c12-d40d-80f2-83b9-d05ecf2866bf" class="">Output:</h2></div><div style="display:contents" dir="ltr"><figure id="38748c12-d40d-804a-82f8-e550ab3e7ec8" class="image" style="text-align:left"><a href="Indian%20Marketplace%20Analysis/9303.png"><img style="width:576px" src="Indian%20Marketplace%20Analysis/9303.png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="38748c12-d40d-8049-8092-db4bc566b5f8" class="">Conclusions</h3></div><div style="display:contents" dir="auto"><p id="38748c12-d40d-809e-8c17-f5035052886a" class="">At this point, I can rely on the created <strong>Lineplot </strong>and make some clear, precious conclusions:</p></div><div style="display:contents" dir="auto"><ol type="1" id="38748c12-d40d-8007-82cf-f09f1ee4af3e" class="numbered-list" start="1"><li>The <strong>most</strong> profitable month is <strong>November</strong>, with 10253 Rupee profit.</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38748c12-d40d-808a-8836-ff32eb30ec56" class="numbered-list" start="2"><li>The <strong>least </strong>profitable month is <strong>May</strong>, which had -3730 Rupee Profit</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38748c12-d40d-8080-b5f2-d93ad8066346" class="numbered-list" start="3"><li>In the period between March and May, the stocks went down by <strong>189%</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38748c12-d40d-80aa-bdec-f3b815a0e8ae" class="numbered-list" start="4"><li>But it had a quick recovery: In the period between September and November, the stocks raised by <strong>832</strong>%</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38748c12-d40d-80e3-bb6a-f7d58f13096d" class="numbered-list" start="5"><li>At the end of the year, the profit dropped to -<strong>1604</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38748c12-d40d-8096-bd9e-c01628898de3" class="numbered-list" start="6"><li>Standard deviation equals <strong>4965 </strong></li></ol></div><div style="display:contents" dir="auto"><p id="38748c12-d40d-80c0-8124-f217c0c05979" class="">For a company, which has every kind of a product, from phones to clothing, to be this unstable is really unusual. It appears to be <em><strong>highly seasonal</strong></em> and vulnerable to <strong>operational shocks.</strong></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-802d-8001-c167d2da2578" class="">In other words, it is very elastic to price changes.</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-80c5-a0f9-dc6aba3f049f" class="">Even though November and January were big in revenue, the company still doesnt manage to keep up and carries 4 months with net loss (May, Jul, Sep, Dec)</p></div><div style="display:contents" dir="auto"><p id="38748c12-d40d-80ff-8bf3-ffbc8d2fd398" class="">We&#x27;ll talk about this period more in Chapter 4.</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-8045-8328-dcd3a4394e87" class="">But now, lets move on to chapter 2, in which we are going to talk about the most profitable regions</p></div><div style="display:contents" dir="auto"><h1 id="38748c12-d40d-8057-a611-e14788d8e23f" class="">Chapter 2: Most profitable regions</h1></div><div style="display:contents" dir="auto"><p id="38748c12-d40d-80bb-93ae-d2c66d763daa" class="">For this chapter, except pandas, I am going to need the same 4 libraries.</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-80b5-8cec-dcc71cefabc1" class="">But, this time, I am going to use a <strong>barplot</strong> instead of a lineplot. Lineplot would never show the same type of data as a barplot.</p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-804e-92fa-dd5fd9445d68" class="">The barplot is going to help us with understanding, which regions are most interested in it, if there are any obvious profit leaders, and also find patterns.</p></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Click to see the code</summary><div class="indented"><div style="display:contents" dir="auto"><p id="38948c12-d40d-8042-95dc-edf2e370c242" class="">The first thing I am going to do is, obviously, creating a SQL query, which is going to give me the 15 most profitable states.</p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8087-8153-c3aec0e073f7" class=""><em>Input:</em></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8043-b11b-e707b95282df" class=""><code>query=&quot;&quot;&quot; </code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80bd-bcc0-d3293502445d" class=""><code>SELECT o.State, SUM(d.Profit) AS Profit </code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-803c-b505-e4bf79425474" class=""><code>FROM Orders o </code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-804f-8df0-d703d2f7d1da" class=""><code>INNER JOIN Details d ON o.&quot;Order ID&quot;=d.&quot;Order ID&quot;</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80a2-9c2b-d51745cdb245" class=""><code>GROUP BY o.State </code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8096-8cf1-f46adc92289e" class=""><code>ORDER BY SUM(d.Profit) DESC </code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-808f-8788-e527c7948ad5" class=""><code>LIMIT 15 &quot;&quot;&quot;</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80d5-bf2b-ddccb0a2787a" class="">Then, I am going to set up the figure for the barplot:</p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8083-a17e-fbc8ec058b55" class=""><code>fig, ax=plt.subplots(dpi=300) sns.set_style(&quot;darkgrid&quot;)</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80ab-9abd-d854deba8901" class="">Then, I am going to create a barplot itself, using seaborn:<br/><code>sns.barplot(data=state, x=&quot;Profit&quot;, y=&quot;State&quot;, hue=&quot;State&quot;, palette=&quot;viridis&quot;, edgecolor=&quot;black&quot;, orient=&quot;h&quot;, ax=ax) plt.yticks(rotation=15)</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80f0-bd95-d3734adcfb1f" class=""><code>for label in ax.get_yticklabels(): label.set_fontweight(&#x27;bold&#x27;)</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80be-9291-c05affcffac7" class=""><strong>Setting up the labels and the title:</strong></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80cb-a49c-f6063626b5f9" class=""><code>plt.title(&quot;Top 15 most profitable regions&quot;, fontweight=&quot;heavy&quot;) plt.ylabel(&quot;&quot;) ax.yaxis.grid(True, linestyle=&#x27;--&#x27;, alpha=0.7, color=&#x27;gray&#x27;) ax.set_axisbelow(True)</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8052-a614-d118f6776975" class=""><strong>Final preparations:</strong></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80dc-946a-d537943a9681" class=""><code>sns.despine() plt.tight_layout() plt.savefig(&quot;Topregions.png&quot;, dpi=300, bbox_inches=&quot;tight&quot;) plt.show()</code></p></div></div></details></div><div style="display:contents" dir="auto"><h2 id="38848c12-d40d-80e3-b249-e4b9d338a106" class=""><em>Output:</em></h2></div><div style="display:contents" dir="ltr"><figure id="38848c12-d40d-804a-a48e-f8c0e3566f5e" class="image"><a href="Indian%20Marketplace%20Analysis/9304.png"><img style="width:624px" src="Indian%20Marketplace%20Analysis/9304.png"/></a></figure></div><div style="display:contents" dir="auto"><h2 id="38848c12-d40d-80a5-aca1-e86ba46048d7" class="">Conclusions</h2></div><div style="display:contents" dir="auto"><ol type="1" id="38848c12-d40d-80c9-b6b2-c05189a767bb" class="numbered-list" start="1"><li>There are 2 regions who really stand out - <strong>Madhya Pradesh and Maharashtra.</strong> They are neighboring states, so the company is probably based in one of them</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38848c12-d40d-80ba-b7f0-f82d0cae5819" class="numbered-list" start="2"><li>Madhya Pradesh has a total profit of <strong>7382 Rupee, while Maharashtra - 6963</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38848c12-d40d-80d8-a48b-fbb2f82877bd" class="numbered-list" start="3"><li>The <strong>standard deviation</strong> equals <strong>2102</strong>, which is actually a lot. The 2 biggest states are the ones who are making the difference<div style="display:contents" dir="auto"><ol type="a" id="38848c12-d40d-802e-8fdd-e34687d6c47b" class="numbered-list" start="1"><li>The explanation to this fact is, if using <code>.iloc[2:]</code>, the standard deviation equals <strong>965</strong><div style="display:contents" dir="auto"><p id="eda798b8-433b-4402-a352-505bfa2df650" class=""><span style="border-bottom:0.05em solid">Let&#x27;s talk about them more</span>:</p></div></li></ol></div></li></ol></div><div style="display:contents" dir="auto"><ul id="38848c12-d40d-804b-8bce-d783ad3c6d8e" class="bulleted-list"><li style="list-style-type:disc">The regions are really different in terms of economical features: Maharashtra contributes 14% of India&#x27;s GDP, while Madhya Pradesh is approximately the tenth economy in the country</li></ul></div><div style="display:contents" dir="auto"><ul id="38848c12-d40d-80ec-8f49-cceef13b7e1b" class="bulleted-list"><li style="list-style-type:disc">Although, Madhya Pradesh has a bit better GDP Growth rate (8.04% vs 7.9%)</li></ul></div><div style="display:contents" dir="auto"><ul id="38848c12-d40d-80de-8e41-ebd7be8af65e" class="bulleted-list"><li style="list-style-type:disc"><strong>Madhya Pradesh</strong> is famous for being India&#x27;s <strong>only diamond-producing state</strong>, alongside other minerals, like copper and manganese reserves</li></ul></div><div style="display:contents" dir="auto"><ul id="38848c12-d40d-8027-94c3-d9caf4e12591" class="bulleted-list"><li style="list-style-type:disc"><strong>Maharashtra</strong> is more of a <strong>financial hub</strong>: it stands as home to Mumbai, anchors India&#x27;s banking, and has major IT hubs</li></ul></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-805f-8614-f4210a9afb2f" class="">It is clear with the company&#x27;s sales in Maharashtra - it has <strong>Printers, Phones, Tables, Chairs</strong> on stock, which are necessary for Banks and IT offices</p></div><div style="display:contents" dir="auto"><h4 id="38848c12-d40d-80db-9448-e08db83aa533" class="">But,</h4></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-8083-bec6-fec3578a0328" class="">What about <strong>Madhya Pradesh</strong>? Well, the thing is probably the <strong>clothing: </strong>Madhya Pradesh is a <strong>highly religious state</strong>, and is considered as a historic capital for textile production.</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-8045-b0f7-f606c215910e" class="">It all also goes up to the climat: Central India experiences extreme seasonal changes, thats why they are interested in <strong>Saree, Hankerchief, Trousers, Kurti, Skirts, Leggings, Shirts and T-Shirts, </strong>which are all on stock in <strong>Madhav</strong></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-80c7-9abb-ed4912aa7346" class="">
+</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-80ca-9fa1-cfb42c2cb0db" class="">It also kind of “justifies” the <strong>unstable profit in Chapter 1</strong>: Because both of the most profitable regions are located in Central India, and they might have extreme seasonal changes, the population wouldnt need any of the proposed products anymore, because most of them are used in <strong>Summertime</strong></p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-8080-ac0d-f43f50c9fbb7" class="">
+</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-80dd-8f60-d56ff5fdd2e4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="38848c12-d40d-808e-9b96-e67a251e3e73" class="">With all explained, lets move on to the <strong>next chapter</strong>.</p></div><div style="display:contents" dir="auto"><h1 id="38848c12-d40d-8093-bb89-f87705e66df1" class="">Chapter 3: Sub-Categories, which are playing the biggest role in the company</h1></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80ab-b745-f394315bb9d7" class="">In this chapter, we are going to find out, which products are <strong>actually </strong>making the difference for the company, and if there are any standing out</p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8069-8ea4-d28a3453df25" class="">We are going to have a much clearer conception of the most sold products and understand what is actually more important for <strong>Madhav</strong>: <strong>Electronics</strong> or <strong>Clothing</strong></p></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Click to see the code</summary><div class="indented"><div style="display:contents" dir="auto"><p id="38948c12-d40d-80ed-b4cd-dece84a9799f" class=""><code>query=&quot;&quot;&quot;<br/>SELECT &quot;Sub-Category&quot;, SUM(Quantity) AS Quantity, SUM(Profit) AS Profit</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8005-8cd7-c264230d3afc" class=""><code><br/>FROM Details</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-800c-beac-ca30a051da39" class=""><code><br/>GROUP BY &quot;Sub-Category&quot;</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8037-8572-c82665582536" class=""><code><br/>HAVING Profit &gt; 2*(SELECT AVG(Profit) FROM Details)</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8065-b590-c4724b19645e" class=""><code><br/>ORDER BY Quantity DESC<br/>&quot;&quot;&quot;</code></p></div></div></details></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80e2-a069-cb6997458a66" class="">For this chapter, I decided to go from <code>matplotlib</code> to <code>plotly</code> and its other library <code>plotly graph objects</code> </p></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Click to see the code</summary><div class="indented"><div style="display:contents" dir="auto"><h3 id="38948c12-d40d-80aa-b0c9-f57cdc63e642" class="">Creating the plot</h3></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80bd-a6a7-ec8eee007039" class=""><code>fig=px.bar(data,<br/>x=&quot;Sub-Category&quot;,<br/>y=&quot;Quantity&quot;,<br/>color=&quot;Quantity&quot;,<br/>color_continuous_scale=&quot;darkmint&quot;,<br/>hover_data=[&quot;Profit&quot;]<br/>)</code></p></div><div style="display:contents" dir="auto"><h3 id="38948c12-d40d-8008-b2be-d34ca43c381b" class="">Customizing the plot</h3></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80ad-99d6-d3db15320edb" class=""><code>fig.update_layout(xaxis=dict(title=dict(text=&quot;Category&quot;, font=dict(size=18, family=&quot;Arial&quot;, weight=&quot;bold&quot;))),<br/>yaxis=dict(title=dict(text=&quot;Amount&quot;, font=dict(size=18, family=&quot;Arial&quot;, weight=&quot;bold&quot;))),<br/>title_text=&quot;&lt;b&gt;Total sales for each category (Only 2x AVG Profit)&lt;b&gt;&quot;,<br/>title_font_size=24,<br/>title_x=0.5,<br/>showlegend=False<br/>)</code></p></div><div style="display:contents" dir="auto"><h3 id="38948c12-d40d-8026-a763-da101607dd05" class="">Finishing the work</h3></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-80c2-98e1-dec5960b389c" class=""><code><br/>fig.write_html(&quot;Categories.html&quot;)<br/>fig.write_image(&quot;CategoriesSold.png&quot;, scale=3)<br/>fig.show()</code></p></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-8008-a3d2-eaff42508d32" class="">
+</p></div></div></details></div><div style="display:contents" dir="auto"><h2 id="38948c12-d40d-8086-b766-fa8b9b589a7d" class="">Output:</h2></div><div style="display:contents" dir="ltr"><figure id="38948c12-d40d-8069-8b98-d403e3428e78" class="image"><a href="Indian%20Marketplace%20Analysis/9305.png"><img style="width:576px" src="Indian%20Marketplace%20Analysis/9305.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="38948c12-d40d-800b-b155-ec13a10b2a6d" class=""><a href="https://detar0.github.io/portfoliodetarlinks/Otherlinks/Categories.html">Click to see interactive</a></p></div><div style="display:contents" dir="auto"><h2 id="38948c12-d40d-8061-a0da-fc648c1aca88" class="">Conclusions</h2></div><div style="display:contents" dir="auto"><ol type="1" id="38948c12-d40d-8050-b701-d8b78d4aef6f" class="numbered-list" start="1"><li>As we can see, <strong>Stole</strong> is an absolute leader - with 671 units sold</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38b48c12-d40d-808f-904a-e62449404b2a" class="numbered-list" start="2"><li>The difference between <strong>Stole</strong> and  <strong>Phones in Quantity </strong>equals 367 *</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38b48c12-d40d-80b9-b785-f59b89f57497" class="numbered-list" start="3"><li>Trousers are on the last place, because they are not usually bought wholesale,     as<strong> Stole</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38b48c12-d40d-8099-b06a-db6fe774989c" class="numbered-list" start="4"><li>Finally - the presence of all these electronics in the plot connects             Maharashtra and Madhav again: <strong> Printers, Chairs, Bookcases.</strong></li></ol></div><div style="display:contents" dir="auto"><p id="38a48c12-d40d-8013-a3c6-cf946f42ac10" class="">At this point, I can clearly say - clothing is the main supply of the company. Even though the rest of the list is not clothing.</p></div><div style="display:contents" dir="auto"><p id="38a48c12-d40d-8011-8d3f-c45ed6aa8236" class="">It is all reasonable too - Stole is really popular in India. As I&#x27;ve said in previous chapters, MP is a very religious state, and is a capital for textile production.</p></div><div style="display:contents" dir="auto"><p id="38a48c12-d40d-80b2-b631-d1dbbd084b1d" class="">So in this case, the presence of both MP and Stole in the first place of their lists is the one of the main factors for the company.</p></div><div style="display:contents" dir="auto"><p id="38a48c12-d40d-805e-9bc5-fd4943031f45" class="">The demand on Stole is always relevant, it is an inelastic product, unlike <strong>Phones, Printers, or Chairs.</strong></p></div><div style="display:contents" dir="auto"><p id="38a48c12-d40d-8007-95a7-f9e7e931d16e" class="">All the items on the list can be connected with the <strong>2 most profitable cities</strong>, which we discussed in the <strong>previous chapter. </strong>This proves my statement, when we were talking about standard deviation: <strong>The 2 biggest cities are the ones, making the difference</strong></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-80c9-aa48-c3d5cb825bfd" class="">
+</p></div><div style="display:contents" dir="auto"><ul id="38b48c12-d40d-803f-b80f-eef66e971e7b" class="bulleted-list"><li style="list-style-type:disc"><em>To put this in perspective, this value is </em><em><strong>higher</strong></em><em> than </em><em><strong>any</strong></em><em> other value in the plot, except </em><em><strong>Stole</strong></em><em>.</em> (*)</li></ul></div><div style="display:contents" dir="auto"><p id="38a48c12-d40d-8084-962a-eb7b4986c0c7" class="">For now, lets move to chapter 4.</p></div><div style="display:contents" dir="auto"><h1 id="38a48c12-d40d-8044-b147-ece21796251b" class="">Chapter 4: Downfall and uprising Paradox</h1></div><div style="display:contents" dir="auto"><p id="38a48c12-d40d-80c0-b1d5-f87907a54b6c" class="">In this chapter, I was going to present you 2 plots - With 2 periods. So, I also needed plotly&#x27;s <code>make_subplots</code> library.</p></div><div style="display:contents" dir="auto"><p id="38a48c12-d40d-8086-88d3-c9d630598397" class="">But first, I needed to create a SQL query, which is going to give me total Quantity from each Category in 1) Downfall period (March, April, May) 2) Uprising period (Sep, Oct, Nov)</p></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Tap to see the code</summary><div class="indented"><div style="display:contents" dir="auto"><p id="38b48c12-d40d-80d8-8848-e7854fb03111" class=""><code>print(df2.head())</code></p></div><div style="display:contents" dir="auto"><h1 id="38b48c12-d40d-8009-9d52-c6a5f24a1c2a" class="">The periods(SQL query)</h1></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-80ac-ba69-e08bb1b7153b" class=""><code>downfall=&quot;&quot;&quot;<br/>SELECT d.&quot;Sub-Category&quot;, SUM(d.Quantity) AS Quantity<br/>FROM Details d<br/>INNER JOIN Orders o ON o.&quot;Order ID&quot;=d.&quot;Order ID&quot;<br/>WHERE o.&quot;Order Date&quot; IN (&quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;)<br/>GROUP BY d.&quot;Sub-Category&quot;<br/>ORDER BY Quantity DESC<br/>LIMIT 10<br/>&quot;&quot;&quot;<br/>data0=pd.read_sql_query(downfall, conn)<br/>print(data0)</code></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-80de-8dd0-dc8790e86ef2" class=""><code>uprising=&quot;&quot;&quot;<br/>SELECT d.&quot;Sub-Category&quot;, SUM(d.Quantity) AS Quantity<br/>FROM Details d<br/>INNER JOIN Orders o ON o.&quot;Order ID&quot;=d.&quot;Order ID&quot;<br/>WHERE o.&quot;Order Date&quot; IN (&quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;)<br/>GROUP BY d.&quot;Sub-Category&quot;<br/>ORDER BY Quantity DESC<br/>LIMIT 10<br/>&quot;&quot;&quot;<br/>data1=pd.read_sql_query(uprising, conn)<br/>print(data1)</code></p></div><div style="display:contents" dir="auto"><h1 id="38b48c12-d40d-80a8-9922-e880a2b521b9" class="">Checking if they have the same amount sold</h1></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-803a-916d-d8dbc32eff05" class=""><code>total0=&quot;&quot;&quot;<br/>SELECT SUM(d.Quantity)<br/>FROM Details d<br/>INNER JOIN Orders o ON o.&quot;Order ID&quot;=d.&quot;Order ID&quot;<br/>WHERE o.&quot;Order Date&quot; IN (&quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;)<br/>&quot;&quot;&quot;<br/>total1=&quot;&quot;&quot;<br/>SELECT SUM(d.Quantity)<br/>FROM Details d<br/>INNER JOIN Orders o ON o.&quot;Order ID&quot;=d.&quot;Order ID&quot;<br/>WHERE o.&quot;Order Date&quot; IN (&quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;)<br/>&quot;&quot;&quot;<br/>total00=pd.read_sql_query(total0, conn)<br/>print(total00)<br/>total10=pd.read_sql_query(total0, conn)<br/>print(total10)</code></p></div><div style="display:contents" dir="auto"><h2 id="38b48c12-d40d-8027-a999-e01983ec9880" class="">Visualization</h2></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-8076-a10c-f405b2ee1e79" class=""><code>fig=make_subplots(rows=1, cols=2, subplot_titles=(&quot;&lt;b&gt;Downfall Period&lt;/b&gt;&quot;, &quot;&lt;b&gt;Uprising Period&lt;b&gt;&quot;))</code></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-80b9-a1f8-e2f5d3cf1cea" class=""><code>fig.add_trace(go.Bar(x=data0[&quot;Sub-Category&quot;], y=data0[&quot;Quantity&quot;], marker=dict(color=data0[&quot;Quantity&quot;], colorscale=&quot;ylorrd&quot;)), row=1, col=1)<br/>fig.update_yaxes(title=dict(text=&quot;&lt;b&gt;Total sold&lt;b&gt;&quot;, font_family=&quot;Arial&quot;, font_size=16, standoff=0), row=1, col=1)</code></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-8054-80e4-ffcfed583de9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-8036-8448-e04c4e9e082c" class=""><code>fig.add_trace(go.Bar(x=data1[&quot;Sub-Category&quot;], y=data1[&quot;Quantity&quot;], marker=dict(color=data1[&quot;Quantity&quot;], colorscale=&quot;blues&quot;)), row=1, col=2)</code></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-8001-8895-c6e8a5345fc2" class=""><code><br/>fig.update_layout(showlegend=False, title=dict(text=&quot;&lt;b&gt;The most sold categories in the...&lt;b&gt;&quot;, x=0.5, font=dict(family=&quot;Arial&quot;, size=32)), hovermode=&quot;closest&quot;)</code></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-807f-a8bd-f2ecf6c67e83" class=""><code><br/>fig.add_annotation(<br/>text=&quot;&lt;b&gt;Category&lt;b&gt;&quot;,<br/>xref=&quot;paper&quot;, yref=&quot;paper&quot;,<br/>x=0.5, y=-0.1,<br/>showarrow=False,<br/>font=dict(size=14)<br/>)<br/>fig.write_image(&quot;UpAndDown.png&quot;, scale=3)<br/>fig.show()</code></p></div></div></details></div><div style="display:contents" dir="auto"><h2 id="38b48c12-d40d-80e3-b87b-ddef7e1cd62e" class="">Output:</h2></div><div style="display:contents" dir="ltr"><figure id="38b48c12-d40d-8018-856f-d69f12980945" class="image"><a href="Indian%20Marketplace%20Analysis/9309.png"><img style="width:576px" src="Indian%20Marketplace%20Analysis/9309.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-8010-b41a-ff1acddcac15" class=""><a href="https://detar0.github.io/portfoliodetarlinks/Otherlinks/UpAndDown.html"> Click to see interactive</a></p></div><div style="display:contents" dir="auto"><h2 id="38b48c12-d40d-80c7-b1f5-c5c262a4f1d1" class="">Conclusions</h2></div><div style="display:contents" dir="auto"><ol type="1" id="38b48c12-d40d-804d-96ec-cc7f91d6f59d" class="numbered-list" start="1"><li>As shown on the plot, there is no significant difference between two period, if looking at the first 3 places</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38b48c12-d40d-802d-8ea5-ca2a778a5532" class="numbered-list" start="2"><li>If looking at the fourth place in the downfall period (<em>Printers</em>), we can see they dissapeared in the uprising period.<div style="display:contents" dir="auto"><ol type="a" id="38b48c12-d40d-80b7-a267-efccbaa87b33" class="numbered-list" start="1"><li>Same can be said about Phones on the 5th place. This tells us, that the company decided to transfer into a household goods store, removing the odd Phones and Printers</li></ol></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="38b48c12-d40d-8089-8745-e714969d9d28" class="numbered-list" start="3"><li>Another proof of the company changing its marketing way is the appear of <strong>furnishings, leggings and accesories</strong> on the list</li></ol></div><div style="display:contents" dir="auto"><h1 id="38b48c12-d40d-80a3-995f-dcf3bcc112f5" class="">The end</h1></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-80dd-a0b6-c0faa971ed12" class="">After chapter 4, I thought that payment method may not be the problem, so i checked if something changed:</p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-800d-95b8-ffa4dddb88d9" class=""><em>Input:</em></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-80b5-8981-e0c7706293a9" class=""><code>query1=&quot;&quot;&quot;<br/>SELECT d.PaymentMode, COUNT(d.PaymentMode) AS Count<br/>FROM Details d<br/>INNER JOIN Orders o ON o.&quot;Order ID&quot;=d.&quot;Order ID&quot;<br/>WHERE o.&quot;Order Date&quot; IN (&quot;Mar&quot;, &quot;Apr&quot;, &quot;May&quot;)<br/>GROUP BY d.PaymentMode<br/>ORDER BY Count DESC<br/>&quot;&quot;&quot;</code></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-809b-addb-d1edde0a98d0" class=""><code>query2=&quot;&quot;&quot;<br/>SELECT d.PaymentMode, COUNT(d.PaymentMode) AS Count<br/>FROM Details d<br/>INNER JOIN Orders o ON o.&quot;Order ID&quot;=d.&quot;Order ID&quot;<br/>WHERE o.&quot;Order Date&quot; IN (&quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;)<br/>GROUP BY PaymentMode<br/>ORDER BY Count DESC<br/>&quot;&quot;&quot;</code></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-8079-9b0f-f201938f099b" class=""><code>payment1=pd.read_sql_query(query1, conn)<br/>payment2=pd.read_sql_query(query2, conn)</code></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-809b-bb42-ecb7c0d3d175" class=""><code>print(payment1)<br/>print(payment2)</code></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-8077-9fff-f5a49f8aa4fa" class=""><em>Output:</em></p></div><div style="display:contents" dir="ltr"><table id="4b140530-8637-4cc1-a2da-b4d666f75f0b" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="d23ba7f2-2026-4a73-b5b0-67d088bee687"><td id="{aGV" class="">Period</td><td id="ZIH;" class="">PaymentMode</td><td id="F?@T" class="">Count</td></tr></div><div style="display:contents" dir="ltr"><tr id="c1fa1ed5-08c6-429b-9a70-0d6c5645ea0e"><td id="{aGV" class="">---</td><td id="ZIH;" class="">---</td><td id="F?@T" class="">---:</td></tr></div><div style="display:contents" dir="ltr"><tr id="e539cf7f-350b-42e1-af72-7c218eae5bec"><td id="{aGV" class="">Mar–May</td><td id="ZIH;" class="">COD</td><td id="F?@T" class="">188</td></tr></div><div style="display:contents" dir="ltr"><tr id="248e7823-5211-4d8b-aeea-6d0a438077e9"><td id="{aGV" class="">Mar–May</td><td id="ZIH;" class="">UPI</td><td id="F?@T" class="">93</td></tr></div><div style="display:contents" dir="ltr"><tr id="d79ee743-32d3-456c-a9d8-ac464167ff80"><td id="{aGV" class="">Mar–May</td><td id="ZIH;" class="">Debit Card</td><td id="F?@T" class="">62</td></tr></div><div style="display:contents" dir="ltr"><tr id="acd7ee23-5294-4cb6-85e0-e10245f50465"><td id="{aGV" class="">Mar–May</td><td id="ZIH;" class="">Credit Card</td><td id="F?@T" class="">43</td></tr></div><div style="display:contents" dir="ltr"><tr id="3ae27cd4-7766-428b-971a-44d90a08b969"><td id="{aGV" class="">Mar–May</td><td id="ZIH;" class="">EMI</td><td id="F?@T" class="">38</td></tr></div><div style="display:contents" dir="ltr"><tr id="b124d923-863d-4b4e-bda7-8d7cf01d25d0"><td id="{aGV" class="">Sep–Nov</td><td id="ZIH;" class="">COD</td><td id="F?@T" class="">169</td></tr></div><div style="display:contents" dir="ltr"><tr id="aef5a9f2-b51a-401a-b2c8-d288a947b2ed"><td id="{aGV" class="">Sep–Nov</td><td id="ZIH;" class="">UPI</td><td id="F?@T" class="">78</td></tr></div><div style="display:contents" dir="ltr"><tr id="726d7839-8956-492c-b193-0a68c5e658e2"><td id="{aGV" class="">Sep–Nov</td><td id="ZIH;" class="">Credit Card</td><td id="F?@T" class="">41</td></tr></div><div style="display:contents" dir="ltr"><tr id="e4e4d026-03a8-4a0d-9765-802a26e6ae21"><td id="{aGV" class="">Sep–Nov</td><td id="ZIH;" class="">Debit Card</td><td id="F?@T" class="">32</td></tr></div><div style="display:contents" dir="ltr"><tr id="5bfc77c9-05da-4d45-a2c7-d5078f4a489b"><td id="{aGV" class="">Sep–Nov</td><td id="ZIH;" class="">EMI</td><td id="F?@T" class="">28</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-80bb-baee-cd9e1193ff1d" class=""><em>p.s. this table was made with notion ai</em></p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-8001-8a57-dc93d0aa6d71" class="">So, as we can see, there is no difference. And this is where i decided to end the project</p></div><div style="display:contents" dir="auto"><p id="38b48c12-d40d-8056-bee9-f3b7dd8ac43a" class="">In some places, I was too lazy, so the project took me approximately 7 days to finish. I spent more time in Notion than in Google Colab.</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
